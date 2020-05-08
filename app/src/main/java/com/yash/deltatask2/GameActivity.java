@@ -6,19 +6,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-
-
-
 public class GameActivity extends AppCompatActivity {
     public com.yash.deltatask2.lines L;
     RelativeLayout rl,main_rl;
     float x,y;
     TextView player_1_win,player_2_win;
     int gridHeight,gridWidth;
-    public static int count =1,player1_win=0,player2_win=0,number_of_players=2;
+    public static int count =1,number_of_players=2;
     public static int[][] horizontal_lines;
     public static int[][] vertical_lines;
     public static int[] players_win;
@@ -28,8 +23,6 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         count=0;
-        player1_win=0;
-        player2_win=0;
         gridHeight=intent.getIntExtra("grid_H",5);
         gridWidth=intent.getIntExtra("grid_W",5);
         if(intent.getIntExtra("number_of_players",2)>=2){

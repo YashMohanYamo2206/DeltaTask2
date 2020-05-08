@@ -48,7 +48,6 @@ void init(){
                     k=(int) (i-100)/((getWidth()-200)/(grid_width));
                     l=(int) (j- getHeight()/4f )/(getHeight()/(2*(grid_height)));
                     if(x>i && x<i+(getWidth()-200)/(grid_width) && (y>j-50 && y<j+50) && (GameActivity.horizontal_lines[k][l]==0)) {
-                    //    if(GameActivity.count%2==1){
                             GameActivity.horizontal_lines[k][l]=1;
                             canvas.drawLine(i,j,i+(getWidth()-200)/(grid_width),j,p[GameActivity.count%GameActivity.number_of_players]);
                             out=true;
@@ -84,18 +83,14 @@ void init(){
                                 else {
                                     if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
                                         canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
-                                        GameActivity.player1_win++;
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                     }
                                     else {
                                         GameActivity.count++;
                                     }
                                 }
-
-
                             }
-
                             break;
-                       // }
                     }
                     if(out){
                         break;
@@ -104,13 +99,11 @@ void init(){
             }
         }
         for(float i = 100;i <= rl.getWidth()-100  ;i+=(getWidth()-200)/(grid_width)) {
-
             for (float j = getHeight()/4f; j < 3*getHeight()/4f - getHeight()/(2*(grid_height)); j += getHeight()/(2*(grid_height))) {
                 if(x>100 && y>getHeight()/4f- 10) {
                     k=(int) (i-100)/((getWidth()-200)/(grid_width));
                     l=(int) (j- getHeight()/4f )/(getHeight()/(2*(grid_height)));
                     if(y>j && y<j+getHeight()/(2*(grid_height)) && (x>i-50 && x<i+50) && (GameActivity.vertical_lines[l][k]==0)) {
-                       // if(GameActivity.count%2==1){
                             GameActivity.vertical_lines[l][k]=1;
                             canvas.drawLine(i,j,i,j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
                             out=true;
@@ -152,7 +145,6 @@ void init(){
                                     }
                                 }
                             }
-
                             break;
                     }
                     if(out){
