@@ -4,10 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bgmain"
     tools:context=".MainActivity"
     >
-
+    <Button
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10sp"
+        android:onClick="music_play"
+        android:id="@+id/sound"
+        android:background="@drawable/ic_volume_up_black_24dp" />
     <EditText
+        android:background="@color/colorPrimaryDark"
+        android:textColorHint="@color/brightYellow"
+        android:textColor="@color/brightYellow"
         android:id="@+id/grid_width"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +30,9 @@
         android:layout_toLeftOf="@+id/grid_x" />
 
     <EditText
+        android:background="@color/colorPrimaryDark"
+        android:textColorHint="@color/brightYellow"
+        android:textColor="@color/brightYellow"
         android:inputType="number"
         android:id="@+id/grid_height"
         android:layout_width="wrap_content"
@@ -47,9 +61,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100sp"
         android:id="@+id/Btn_Start"
+        android:background="@drawable/button"
         android:text="Start"/>
 
     <TextView
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/brightYellow"
         android:id="@+id/numb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,13 +77,14 @@
         />
 
     <EditText
+        android:id="@+id/number_of_players"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/number_of_players"
-        android:layout_toRightOf="@+id/numb"
+        android:layout_marginLeft="43dp"
         android:layout_marginTop="206sp"
+        android:layout_toRightOf="@+id/numb"
         android:hint="number of players"
-        android:layout_marginLeft="40sp"
         android:inputType="number"
-        />
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary" />
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -37,6 +38,7 @@ void init(){
     p[2].setColor(Color.YELLOW);
     p[3].setColor(Color.GRAY);
     p[4].setColor(Color.CYAN);
+
 }
 
     @Override
@@ -48,6 +50,8 @@ void init(){
                     k=(int) (i-100)/((getWidth()-200)/(grid_width));
                     l=(int) (j- getHeight()/4f )/(getHeight()/(2*(grid_height)));
                     if(x>i && x<i+(getWidth()-200)/(grid_width) && (y>j-50 && y<j+50) && (GameActivity.horizontal_lines[k][l]==0)) {
+                        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
+                        mp.start();
                             GameActivity.horizontal_lines[k][l]=1;
                             canvas.drawLine(i,j,i+(getWidth()-200)/(grid_width),j,p[GameActivity.count%GameActivity.number_of_players]);
                             out=true;
@@ -104,6 +108,8 @@ void init(){
                     k=(int) (i-100)/((getWidth()-200)/(grid_width));
                     l=(int) (j- getHeight()/4f )/(getHeight()/(2*(grid_height)));
                     if(y>j && y<j+getHeight()/(2*(grid_height)) && (x>i-50 && x<i+50) && (GameActivity.vertical_lines[l][k]==0)) {
+                        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
+                        mp.start();
                             GameActivity.vertical_lines[l][k]=1;
                             canvas.drawLine(i,j,i,j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
                             out=true;
