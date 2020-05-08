@@ -23,7 +23,6 @@ public class dotsAndBoxes extends View {
         grid_height=gridHeight-1;
         p_background.setColor(Color.YELLOW);
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

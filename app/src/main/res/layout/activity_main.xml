@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginRight="59dp"
-        android:textSize="25sp"
-        android:hint="grid_x"
+        android:textSize="15sp"
+        android:hint="horizontal dots"
         android:inputType="number"
         android:layout_toLeftOf="@+id/grid_x" />
 
@@ -27,8 +27,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="73dp"
         android:layout_toRightOf="@+id/grid_x"
-        android:hint="grid_y"
-        android:textSize="25sp" />
+        android:hint="vertical dots"
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,4 +48,23 @@
         android:layout_marginTop="100sp"
         android:id="@+id/Btn_Start"
         android:text="Start"/>
+
+    <TextView
+        android:id="@+id/numb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/grid_x"
+        android:layout_marginTop="-131dp"
+        android:text="Number of players :-"
+        android:layout_marginLeft="30sp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/number_of_players"
+        android:layout_toRightOf="@+id/numb"
+        android:layout_marginTop="206sp"
+        android:hint="number of players"
+        android:layout_marginLeft="40sp"
+        />
 </RelativeLayout>

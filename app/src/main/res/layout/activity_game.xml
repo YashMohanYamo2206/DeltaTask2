@@ -6,4 +6,23 @@
     android:layout_height="match_parent"
     android:id="@+id/relativeLayout"
     tools:context=".GameActivity">
+
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="player_1_score"
+        android:id="@+id/player_1_win"
+    android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/player_2_win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_toRightOf="@+id/player_1_win"
+
+        android:text="player_2_score"
+        android:textSize="20sp" />
+
 </RelativeLayout>
