@@ -11,7 +11,7 @@
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="player_1_score"
+    android:text=""
         android:id="@+id/player_1_win"
     android:textSize="20sp"/>
 
@@ -22,7 +22,7 @@
         android:layout_marginLeft="48dp"
         android:layout_toRightOf="@+id/player_1_win"
 
-        android:text="player_2_score"
+        android:text=""
         android:textSize="20sp" />
 
 </RelativeLayout>

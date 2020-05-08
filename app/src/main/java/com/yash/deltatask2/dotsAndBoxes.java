@@ -1,5 +1,4 @@
 package com.yash.deltatask2;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 @SuppressLint("ViewConstructor")
 public class dotsAndBoxes extends View {
     RelativeLayout rl;
@@ -26,7 +24,6 @@ public class dotsAndBoxes extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         for(float i = 100;i<=rl.getWidth()-100;i+=(getWidth()-200)/(grid_width)) {
             for (float j = getHeight()/4f; j < 3*getHeight()/4f; j += getHeight()/(2*(grid_height))) {
                 canvas.drawCircle(i, j, 17.5f, p);

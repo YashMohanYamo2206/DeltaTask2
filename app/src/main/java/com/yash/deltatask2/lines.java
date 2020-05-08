@@ -11,40 +11,33 @@ import android.widget.RelativeLayout;
 @SuppressLint("ViewConstructor")
 public class lines extends View {
     RelativeLayout rl;
-    Paint p1,p2;
+    Paint[] p;
     float x,y;
     int k=0,l=0;
     int grid_width,grid_height;
     boolean out = false;
     public lines(Context context, RelativeLayout relativeLayout, float x_touch, float y_touch,int gridHeight,int gridWidth) {
         super(context);
-
-
         rl=relativeLayout;
-
-
         x=x_touch;
         y=y_touch;
-
-
-        p1=new Paint();
-        p2=new Paint();
-
-
-        p1.setColor(Color.BLUE);
-        p2.setColor(Color.RED);
-
-
-        p1.setStrokeWidth(10);
-        p2.setStrokeWidth(10);
-
-
+        init();
         grid_width=gridWidth-1;
         grid_height=gridHeight-1;
-
-
     }
 
+void init(){
+        p=new Paint[5];
+    for (int i = 0; i <5; i++) {
+        p[i] = new Paint();
+        p[i].setStrokeWidth(10);
+    }
+    p[0].setColor(Color.BLUE);
+    p[1].setColor(Color.RED);
+    p[2].setColor(Color.YELLOW);
+    p[3].setColor(Color.GRAY);
+    p[4].setColor(Color.CYAN);
+}
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -55,25 +48,25 @@ public class lines extends View {
                     k=(int) (i-100)/((getWidth()-200)/(grid_width));
                     l=(int) (j- getHeight()/4f )/(getHeight()/(2*(grid_height)));
                     if(x>i && x<i+(getWidth()-200)/(grid_width) && (y>j-50 && y<j+50) && (GameActivity.horizontal_lines[k][l]==0)) {
-                        if(GameActivity.count%2==1){
+                    //    if(GameActivity.count%2==1){
                             GameActivity.horizontal_lines[k][l]=1;
-                            canvas.drawLine(i,j,i+(getWidth()-200)/(grid_width),j,p1);
+                            canvas.drawLine(i,j,i+(getWidth()-200)/(grid_width),j,p[GameActivity.count%GameActivity.number_of_players]);
                             out=true;
-                            if(GameActivity.count>0){
+                            if(GameActivity.count>=0){
                                 if(l!=grid_height && l!=0 ){
                                     if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                         if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l-1]==1 && GameActivity.vertical_lines[l-1][k]==1 && GameActivity.vertical_lines[l-1][k+1]==1){
-                                            canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p1);
-                                            GameActivity.player1_win++;
+                                            canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                            GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                         }
 
                                     }
 
                                     else if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l-1]==1 && GameActivity.vertical_lines[l-1][k]==1 && GameActivity.vertical_lines[l-1][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                     }
                                     else {
                                         GameActivity.count++;
@@ -81,8 +74,8 @@ public class lines extends View {
                                 }
                                 else if(l==grid_height){
                                     if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l-1]==1 && GameActivity.vertical_lines[l-1][k]==1 && GameActivity.vertical_lines[l-1][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                     }
                                     else {
                                         GameActivity.count++;
@@ -90,7 +83,7 @@ public class lines extends View {
                                 }
                                 else {
                                     if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
+                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
                                         GameActivity.player1_win++;
                                     }
                                     else {
@@ -102,56 +95,7 @@ public class lines extends View {
                             }
 
                             break;
-                        }
-                        else {
-                            GameActivity.horizontal_lines[k][l]=1;
-                            canvas.drawLine(i,j,i+(getWidth()-200)/(grid_width),j,p2);
-                            out=true;
-                            if(GameActivity.count>0){
-                                if(l!=grid_height && l!=0){
-                                    if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                        if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l-1]==1 && GameActivity.vertical_lines[l-1][k]==1 && GameActivity.vertical_lines[l-1][k+1]==1){
-                                            canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p2);
-                                            GameActivity.player2_win++;
-
-                                        }
-                                    }
-
-                                    else if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l-1]==1 && GameActivity.vertical_lines[l-1][k]==1 && GameActivity.vertical_lines[l-1][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                    }
-                                    else{
-                                        GameActivity.count++;
-                                    }
-
-
-                                }
-                                else if(l==grid_height){
-                                    if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l-1]==1 && GameActivity.vertical_lines[l-1][k]==1 && GameActivity.vertical_lines[l-1][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j-getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                    }
-                                    else {
-                                        GameActivity.count++;
-                                    }
-                                }
-                                else {
-                                    if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                    }
-                                    else {
-                                        GameActivity.count++;
-                                    }
-                                }
-                            }
-
-                            break;
-                        }
-
+                       // }
                     }
                     if(out){
                         break;
@@ -166,23 +110,23 @@ public class lines extends View {
                     k=(int) (i-100)/((getWidth()-200)/(grid_width));
                     l=(int) (j- getHeight()/4f )/(getHeight()/(2*(grid_height)));
                     if(y>j && y<j+getHeight()/(2*(grid_height)) && (x>i-50 && x<i+50) && (GameActivity.vertical_lines[l][k]==0)) {
-                        if(GameActivity.count%2==1){
+                       // if(GameActivity.count%2==1){
                             GameActivity.vertical_lines[l][k]=1;
-                            canvas.drawLine(i,j,i,j+getHeight()/(2*(grid_height)),p1);
+                            canvas.drawLine(i,j,i,j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
                             out=true;
-                            if(GameActivity.count>0){
+                            if(GameActivity.count>=0){
                                 if(k!=grid_width && k!=0){
                                     if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                       canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                       canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                         if(GameActivity.horizontal_lines[k-1][l+1]==1 && GameActivity.horizontal_lines[k-1][l]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k-1]==1){
-                                            canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
-                                            GameActivity.player1_win++;
+                                            canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                            GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                         }
                                     }
                                     else if(GameActivity.horizontal_lines[k-1][l+1]==1 && GameActivity.horizontal_lines[k-1][l]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k-1]==1){
-                                        canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                        canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                     }
                                     else {
                                         GameActivity.count++;
@@ -190,8 +134,8 @@ public class lines extends View {
                                 }
                                 else if(k==grid_width){
                                     if(GameActivity.horizontal_lines[k-1][l+1]==1 && GameActivity.horizontal_lines[k-1][l]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k-1]==1){
-                                        canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                        canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                     }
                                     else {
                                         GameActivity.count++;
@@ -200,8 +144,8 @@ public class lines extends View {
 
                                 else {
                                     if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p1);
-                                        GameActivity.player1_win++;
+                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p[GameActivity.count%GameActivity.number_of_players]);
+                                        GameActivity.players_win[GameActivity.count%GameActivity.number_of_players]++;
                                     }
                                     else {
                                         GameActivity.count++;
@@ -210,52 +154,6 @@ public class lines extends View {
                             }
 
                             break;
-                        }
-                        else{
-                            GameActivity.vertical_lines[l][k]=1;
-
-                            canvas.drawLine(i,j,i,j+getHeight()/(2*(grid_height)),p2);
-                            out=true;
-                            if(GameActivity.count>0){
-                                if(k!=grid_width && k!= 0){
-                                    if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                        if(GameActivity.horizontal_lines[k-1][l+1]==1 && GameActivity.horizontal_lines[k-1][l]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k-1]==1){
-                                            canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                            GameActivity.player2_win++;
-                                        }
-                                    }
-                                    else if(GameActivity.horizontal_lines[k-1][l+1]==1 && GameActivity.horizontal_lines[k-1][l]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k-1]==1){
-                                        canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                    }
-                                    else {
-                                        GameActivity.count++;
-                                    }
-                                }
-                                else if(k==grid_width){
-                                    if(GameActivity.horizontal_lines[k-1][l+1]==1 && GameActivity.horizontal_lines[k-1][l]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k-1]==1){
-                                        canvas.drawRect(i,j,i-(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                    }
-                                    else {
-                                        GameActivity.count++;
-                                    }
-                                }
-                                else {
-                                    if(GameActivity.horizontal_lines[k][l]==1 && GameActivity.horizontal_lines[k][l+1]==1 && GameActivity.vertical_lines[l][k]==1 && GameActivity.vertical_lines[l][k+1]==1){
-                                        canvas.drawRect(i,j,i+(getWidth()-200)/(grid_width),j+getHeight()/(2*(grid_height)),p2);
-                                        GameActivity.player2_win++;
-                                    }
-                                    else {
-                                        GameActivity.count++;
-                                    }
-                                }
-
-                            }
-                            break;
-                            }
                     }
                     if(out){
                         break;

@@ -17,8 +17,8 @@ public class GameActivity extends AppCompatActivity {
     RelativeLayout rl,main_rl;
     float x,y;
     TextView player_1_win,player_2_win;
-    int gridHeight,gridWidth,number_of_players=2;
-    public static int count =1,player1_win=0,player2_win=0;
+    int gridHeight,gridWidth;
+    public static int count =1,player1_win=0,player2_win=0,number_of_players=2;
     public static int[][] horizontal_lines;
     public static int[][] vertical_lines;
     public static int[] players_win;
@@ -27,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
-        count=1;
+        count=0;
         player1_win=0;
         player2_win=0;
         gridHeight=intent.getIntExtra("grid_H",5);
@@ -51,8 +51,8 @@ public class GameActivity extends AppCompatActivity {
                 y=event.getY();
                 lines lines = new lines(GameActivity.this,main_rl,x,y,gridHeight,gridWidth);
                 main_rl.addView(lines);
-                player_1_win.setText(String.valueOf(player1_win));
-                player_2_win.setText(String.valueOf(player2_win));
+                player_1_win.setText(String.valueOf(players_win[0]));
+                player_2_win.setText(String.valueOf(players_win[1]));
                 return false;
             }
         });
