@@ -11,14 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class GameActivity extends AppCompatActivity {
     public com.yash.deltatask2.lines L;
-    RelativeLayout rl, main_rl;
+    RelativeLayout main_rl;
     float x, y;
     Vibrator v;
     MediaPlayer mp;
@@ -66,22 +66,11 @@ public class GameActivity extends AppCompatActivity {
         horizontal_lines = new int[gridWidth - 1][gridHeight];
         vertical_lines = new int[gridHeight - 1][gridWidth];
         count_boxes = 0;
-        //player_1_win.setText(players_win[0]);
         player_1_win.setTextColor(Color.BLUE);
-        // player_3_win.setText(players_win[2]);
         player_3_win.setTextColor(Color.YELLOW);
-        // player_2_win.setText(players_win[1]);
         player_2_win.setTextColor(Color.RED);
-        // player_4_win.setText(players_win[3]);
         player_4_win.setTextColor(Color.GRAY);
-        // player_5_win.setText(players_win[4]);
         player_5_win.setTextColor(Color.CYAN);
-        //  player_1_win = findViewById(R.id.player_1_win);
-        // player_2_win = findViewById(R.id.player_2_win);
-        // player_1_win.setX(10);
-        // player_1_win.setY((float) main_rl.getHeight()/8);
-        //player_2_win.setY((float) main_rl.getHeight()/8);
-        //player_2_win.setX((float)main_rl.getWidth()/number_of_players+10);
         dotsAndBoxes dab = new dotsAndBoxes(GameActivity.this, main_rl, gridHeight, gridWidth);
         main_rl.addView(dab);
         main_rl.setOnTouchListener(new View.OnTouchListener() {
@@ -112,9 +101,8 @@ public class GameActivity extends AppCompatActivity {
                 player_1_win.setTextColor(Color.BLUE);
                 player_2_win.setText(String.valueOf(players_win[1]));
                 player_2_win.setTextColor(Color.RED);
-                player_3_win.setVisibility(View.INVISIBLE);
-                player_4_win.setVisibility(View.INVISIBLE);
-                player_5_win.setVisibility(View.INVISIBLE);
+                player_2_win.setVisibility(View.VISIBLE);
+                player_1_win.setVisibility(View.VISIBLE);
                 break;
             case 3:
                 player_1_win.setText(String.valueOf(players_win[0]));
@@ -123,8 +111,9 @@ public class GameActivity extends AppCompatActivity {
                 player_2_win.setTextColor(Color.RED);
                 player_3_win.setText(String.valueOf(players_win[2]));
                 player_3_win.setTextColor(Color.YELLOW);
-                player_4_win.setVisibility(View.INVISIBLE);
-                player_5_win.setVisibility(View.INVISIBLE);
+                player_2_win.setVisibility(View.VISIBLE);
+                player_1_win.setVisibility(View.VISIBLE);
+                player_3_win.setVisibility(View.VISIBLE);
                 break;
             case 4:
                 player_1_win.setText(String.valueOf(players_win[0]));
@@ -135,7 +124,10 @@ public class GameActivity extends AppCompatActivity {
                 player_3_win.setTextColor(Color.YELLOW);
                 player_4_win.setText(String.valueOf(players_win[3]));
                 player_4_win.setTextColor(Color.GRAY);
-                player_5_win.setVisibility(View.INVISIBLE);
+                player_2_win.setVisibility(View.VISIBLE);
+                player_1_win.setVisibility(View.VISIBLE);
+                player_3_win.setVisibility(View.VISIBLE);
+                player_4_win.setVisibility(View.VISIBLE);
                 break;
             case 5:
                 player_1_win.setText(String.valueOf(players_win[0]));
@@ -148,6 +140,11 @@ public class GameActivity extends AppCompatActivity {
                 player_4_win.setTextColor(Color.GRAY);
                 player_5_win.setText(String.valueOf(players_win[4]));
                 player_5_win.setTextColor(Color.CYAN);
+                player_2_win.setVisibility(View.VISIBLE);
+                player_1_win.setVisibility(View.VISIBLE);
+                player_3_win.setVisibility(View.VISIBLE);
+                player_4_win.setVisibility(View.VISIBLE);
+                player_5_win.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -155,7 +152,7 @@ public class GameActivity extends AppCompatActivity {
     private void checkWinner() {
         int max_score = players_win[0], winner = 1;
         boolean draw = false, greater = false;
-        String s = "draw between player " + winner;
+        String s = "";
         for (int i = 1; i < number_of_players; i++) {
             if (players_win[i] == max_score) {
                 draw = true;
@@ -164,6 +161,7 @@ public class GameActivity extends AppCompatActivity {
             } else if (players_win[i] > max_score) {
                 max_score = players_win[i];
                 winner = i + 1;
+                s = "draw between player " + winner;
                 draw = false;
             }
         }
@@ -182,7 +180,6 @@ public class GameActivity extends AppCompatActivity {
         if (winner == 5) {
             clr = "CYAN";
         }
-        //Toast.makeText(this, "winner is player-"+winner+"-color-"+ clr, Toast.LENGTH_SHORT).show();
         if (draw) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setMessage(s);

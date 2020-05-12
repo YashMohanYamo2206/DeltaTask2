@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -109,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPostResume();
         if (mp != null) {
             mp.start();
-            //sound.setBackgroundResource(R.drawable.ic_volume_off_black_24dp);
         }
     }
 

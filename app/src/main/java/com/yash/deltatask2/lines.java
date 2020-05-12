@@ -79,8 +79,6 @@ public class lines extends View {
                                         public void onCompletion(MediaPlayer mp) {
                                             mpbox.release();
                                         }
-
-                                        ;
                                     });
                                 } else if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l - 1] == 1 && GameActivity.vertical_lines[l - 1][k] == 1 && GameActivity.vertical_lines[l - 1][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j - getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
@@ -107,8 +105,6 @@ public class lines extends View {
                                         public void onCompletion(MediaPlayer mp) {
                                             mpbox.release();
                                         }
-
-                                        ;
                                     });
                                 } else {
                                     GameActivity.count++;
@@ -124,8 +120,6 @@ public class lines extends View {
                                         public void onCompletion(MediaPlayer mp) {
                                             mpbox.release();
                                         }
-
-                                        ;
                                     });
                                 } else {
                                     GameActivity.count++;
@@ -175,8 +169,6 @@ public class lines extends View {
                                         public void onCompletion(MediaPlayer mp) {
                                             mpbox.release();
                                         }
-
-                                        ;
                                     });
                                 } else if (GameActivity.horizontal_lines[k - 1][l + 1] == 1 && GameActivity.horizontal_lines[k - 1][l] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k - 1] == 1) {
                                     canvas.drawRect(i, j, i - (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
@@ -205,8 +197,6 @@ public class lines extends View {
                                         public void onCompletion(MediaPlayer mp) {
                                             mpbox.release();
                                         }
-
-                                        ;
                                     });
                                 } else {
                                     GameActivity.count++;
@@ -222,8 +212,6 @@ public class lines extends View {
                                         public void onCompletion(MediaPlayer mp) {
                                             mpbox.release();
                                         }
-
-                                        ;
                                     });
                                 } else {
                                     GameActivity.count++;
