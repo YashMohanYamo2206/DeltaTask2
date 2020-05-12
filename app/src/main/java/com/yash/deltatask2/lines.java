@@ -12,13 +12,11 @@ import android.widget.RelativeLayout;
 @SuppressLint("ViewConstructor")
 public class lines extends View {
     RelativeLayout rl;
-    Paint[] p;
+    public static Paint[] p;
     float x, y;
     int k = 0, l = 0;
     int grid_width, grid_height;
     boolean out = false;
-    MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
-    MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
 
     public lines(Context context, RelativeLayout relativeLayout, float x_touch, float y_touch, int gridHeight, int gridWidth) {
         super(context);
@@ -49,11 +47,18 @@ public class lines extends View {
         super.onDraw(canvas);
         for (float i = 100; i <= rl.getWidth() - 100 - (getWidth() - 200) / (grid_width); i += (getWidth() - 200) / (grid_width)) {
             for (float j = getHeight() / 4f; j < 3 * getHeight() / 4f; j += getHeight() / (2 * (grid_height))) {
-                if (x > 100 && y > getHeight() / 4f - 10) {
+                if (x > 100 && y > getHeight() / 4f - 50) {
                     k = (int) (i - 100) / ((getWidth() - 200) / (grid_width));
                     l = (int) (j - getHeight() / 4f) / (getHeight() / (2 * (grid_height)));
                     if (x > i && x < i + (getWidth() - 200) / (grid_width) && (y > j - 50 && y < j + 50) && (GameActivity.horizontal_lines[k][l] == 0)) {
+                        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
                         mp.start();
+                        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.release();
+                            }
+                        });
                         GameActivity.horizontal_lines[k][l] = 1;
                         canvas.drawLine(i, j, i + (getWidth() - 200) / (grid_width), j, p[GameActivity.count % GameActivity.number_of_players]);
                         out = true;
@@ -62,15 +67,32 @@ public class lines extends View {
                                 if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l + 1] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    GameActivity.count_boxes++;
                                     if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l - 1] == 1 && GameActivity.vertical_lines[l - 1][k] == 1 && GameActivity.vertical_lines[l - 1][k + 1] == 1) {
                                         canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j - getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                         GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                        GameActivity.count_boxes++;
                                     }
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l - 1] == 1 && GameActivity.vertical_lines[l - 1][k] == 1 && GameActivity.vertical_lines[l - 1][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j - getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+                                    });
+                                    GameActivity.count_boxes++;
                                 } else {
                                     GameActivity.count++;
                                 }
@@ -78,8 +100,16 @@ public class lines extends View {
                                 if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l - 1] == 1 && GameActivity.vertical_lines[l - 1][k] == 1 && GameActivity.vertical_lines[l - 1][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j - getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
-                                    MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
+                                    GameActivity.count_boxes++;
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else {
                                     GameActivity.count++;
                                 }
@@ -87,7 +117,16 @@ public class lines extends View {
                                 if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l + 1] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    GameActivity.count_boxes++;
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else {
                                     GameActivity.count++;
                                 }
@@ -107,7 +146,15 @@ public class lines extends View {
                     k = (int) (i - 100) / ((getWidth() - 200) / (grid_width));
                     l = (int) (j - getHeight() / 4f) / (getHeight() / (2 * (grid_height)));
                     if (y > j && y < j + getHeight() / (2 * (grid_height)) && (x > i - 50 && x < i + 50) && (GameActivity.vertical_lines[l][k] == 0)) {
+                        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
                         mp.start();
+                        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.release();
+                            }
+
+                            ;
+                        });
                         GameActivity.vertical_lines[l][k] = 1;
                         canvas.drawLine(i, j, i, j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                         out = true;
@@ -116,15 +163,34 @@ public class lines extends View {
                                 if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l + 1] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    GameActivity.count_boxes++;
                                     if (GameActivity.horizontal_lines[k - 1][l + 1] == 1 && GameActivity.horizontal_lines[k - 1][l] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k - 1] == 1) {
                                         canvas.drawRect(i, j, i - (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                         GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                        GameActivity.count_boxes++;
                                     }
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else if (GameActivity.horizontal_lines[k - 1][l + 1] == 1 && GameActivity.horizontal_lines[k - 1][l] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k - 1] == 1) {
                                     canvas.drawRect(i, j, i - (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    GameActivity.count_boxes++;
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else {
                                     GameActivity.count++;
                                 }
@@ -132,7 +198,16 @@ public class lines extends View {
                                 if (GameActivity.horizontal_lines[k - 1][l + 1] == 1 && GameActivity.horizontal_lines[k - 1][l] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k - 1] == 1) {
                                     canvas.drawRect(i, j, i - (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    GameActivity.count_boxes++;
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else {
                                     GameActivity.count++;
                                 }
@@ -140,7 +215,16 @@ public class lines extends View {
                                 if (GameActivity.horizontal_lines[k][l] == 1 && GameActivity.horizontal_lines[k][l + 1] == 1 && GameActivity.vertical_lines[l][k] == 1 && GameActivity.vertical_lines[l][k + 1] == 1) {
                                     canvas.drawRect(i, j, i + (getWidth() - 200) / (grid_width), j + getHeight() / (2 * (grid_height)), p[GameActivity.count % GameActivity.number_of_players]);
                                     GameActivity.players_win[GameActivity.count % GameActivity.number_of_players]++;
+                                    GameActivity.count_boxes++;
+                                    final MediaPlayer mpbox = MediaPlayer.create(getContext(), R.raw.boxcompletesound);
                                     mpbox.start();
+                                    mpbox.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                        public void onCompletion(MediaPlayer mp) {
+                                            mpbox.release();
+                                        }
+
+                                        ;
+                                    });
                                 } else {
                                     GameActivity.count++;
                                 }

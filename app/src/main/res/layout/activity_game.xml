@@ -13,15 +13,18 @@
         android:id="@+id/player_1_win"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:layout_margin="50sp"
+        android:text="1"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/player_2_win"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="48dp"
-        android:layout_toRightOf="@+id/player_1_win"
-        android:textSize="20sp" />
+        android:layout_marginLeft="110sp"
+        android:layout_marginTop="50sp"
+        android:text="2"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/soundgame"
@@ -31,5 +34,51 @@
         android:layout_margin="10sp"
         android:background="@drawable/ic_volume_up_black_24dp"
         android:onClick="music" />
+
+    <Button
+        android:layout_width="140sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="50sp"
+        android:background="@drawable/button"
+        android:onClick="newGame"
+        android:text="new game" />
+
+    <Button
+        android:layout_width="140sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="50sp"
+        android:background="@drawable/button"
+        android:onClick="quit"
+        android:text="QUIT" />
+
+    <TextView
+        android:id="@+id/player_3_win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="170sp"
+        android:layout_marginTop="50sp"
+        android:text="3"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/player_4_win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="230sp"
+        android:layout_marginTop="50sp"
+        android:text="4"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/player_5_win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300sp"
+        android:layout_marginTop="50sp"
+        android:text="5"
+        android:textSize="30sp" />
 
 </RelativeLayout>

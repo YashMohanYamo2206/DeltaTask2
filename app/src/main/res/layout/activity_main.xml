@@ -16,33 +16,61 @@
         android:background="@drawable/ic_volume_up_black_24dp"
         android:onClick="music_play" />
 
-    <EditText
-        android:id="@+id/grid_width"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/Btn_Start"
+        android:layout_marginTop="93dp"
+        android:text="INSTRUCTIONS"
+        android:textColor="@color/brightYellow"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btn_instructions"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="50sp"
+        android:layout_marginLeft="50sp"
+        android:layout_marginTop="50sp"
+        android:layout_marginEnd="50sp"
+        android:layout_marginRight="50sp"
+        android:layout_marginBottom="111dp"
+        android:onClick="instruction"
+        android:background="@drawable/ic_insert_comment_black_24dp" />
+
+    <EditText
+        android:id="@+id/grid_width"
+        android:layout_width="120sp"
+        android:layout_height="40sp"
         android:layout_centerInParent="true"
         android:layout_marginRight="59dp"
         android:layout_toLeftOf="@+id/grid_x"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/rectangle"
+        android:cursorVisible="true"
+        android:gravity="center"
         android:hint="horizontal dots"
         android:inputType="number"
-        android:textColor="@color/brightYellow"
-        android:textColorHint="@color/brightYellow"
+        android:textColorHint="@color/colorPrimaryDark"
         android:textSize="15sp" />
 
     <EditText
         android:id="@+id/grid_height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120sp"
+        android:layout_height="40sp"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="73dp"
+        android:layout_marginRight="10sp"
         android:layout_toRightOf="@+id/grid_x"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/rectangle"
+        android:cursorVisible="true"
+        android:gravity="center"
         android:hint="vertical dots"
         android:inputType="number"
-        android:textColor="@color/brightYellow"
-        android:textColorHint="@color/brightYellow"
+        android:textColorHint="@color/colorPrimaryDark"
         android:textSize="15sp" />
 
     <TextView
@@ -52,6 +80,7 @@
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:text="X"
+        android:textColor="@color/brightYellow"
         android:textSize="20sp" />
 
 
@@ -68,23 +97,27 @@
     <TextView
         android:id="@+id/numb"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40sp"
         android:layout_alignTop="@id/grid_x"
         android:layout_marginLeft="30sp"
         android:layout_marginTop="-131dp"
-        android:background="@color/colorPrimaryDark"
-        android:text="Number of players :-"
-        android:textColor="@color/brightYellow" />
+        android:background="@drawable/rectangle"
+        android:gravity="center"
+
+        android:text="Number of players :-" />
 
     <EditText
         android:id="@+id/number_of_players"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200sp"
+        android:layout_height="40sp"
         android:layout_marginLeft="43dp"
-        android:layout_marginTop="206sp"
+        android:layout_marginTop="228sp"
         android:layout_toRightOf="@+id/numb"
+        android:background="@drawable/rectangle"
+        android:cursorVisible="true"
+        android:gravity="center"
         android:hint="number of players"
         android:inputType="number"
-        android:textColor="@color/colorPrimary"
-        android:textColorHint="@color/colorPrimary" />
+        android:selectAllOnFocus="true"
+        android:textColorHint="@color/colorPrimaryDark" />
 </RelativeLayout>
